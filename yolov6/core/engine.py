@@ -13,7 +13,7 @@ import math
 import torch
 from torch.cuda import amp
 from torch.nn.parallel import DistributedDataParallel as DDP
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 
 import tools.eval as eval
 from yolov6.data.data_load import create_dataloader
@@ -61,7 +61,7 @@ class Trainer:
         self.scheduler, self.lf = self.get_lr_scheduler(args, cfg, self.optimizer)
         self.ema = ModelEMA(model) if self.main_process else None
         # tensorboard
-        self.tblogger = SummaryWriter(self.save_dir) if self.main_process else None
+        self.tblogger = None #SummaryWriter(self.save_dir) if self.main_process else None
         self.start_epoch = 0
         #resume
         if hasattr(self, "ckpt"):
@@ -183,9 +183,9 @@ class Trainer:
             self.evaluate_results = list(self.evaluate_results) + lr
 
             # log for tensorboard
-            write_tblog(self.tblogger, self.epoch, self.evaluate_results, self.mean_loss)
+#             write_tblog(self.tblogger, self.epoch, self.evaluate_results, self.mean_loss)
             # save validation predictions to tensorboard
-            write_tbimg(self.tblogger, self.vis_imgs_list, self.epoch, type='val')
+#             write_tbimg(self.tblogger, self.vis_imgs_list, self.epoch, type='val')
 
     def eval_model(self):
         if not hasattr(self.cfg, "eval_params"):
