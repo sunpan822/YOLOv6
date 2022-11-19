@@ -14,33 +14,21 @@ import time
 from multiprocessing import Process
 from random import shuffle
 from shutil import move, copy
+import yaml
 
 '''
-YOLO v5 
+YOLO v6 
 xml -> txt
 '''
-class2id = {
-    "front_wear": 0,
-    "front_no_wear": 1,
-    "front_under_nose_wear": 2,
-    "front_under_mouth_wear": 3,
-    "mask_front_wear": 4,
-    "mask_front_under_nose_wear": 5,
-    "mask_front_under_mouth_wear": 6,
-    "side_wear": 7,
-    "side_no_wear": 8,
-    "side_under_nose_wear": 9,
-    "side_under_mouth_wear": 10,
-    "mask_side_wear": 11,
-    "mask_side_under_nose_wear": 12,
-    "mask_side_under_mouth_wear": 13,
-    "side_back_head_wear": 14,
-    "side_back_head_no_wear": 15,
-    "back_head": 16,
-    "strap": 17,
-    "front_unknown": 18,
-    "side_unknown": 19
-}
+
+
+def names2dict(yaml_path):
+    with open(yaml_path, encoding="utf-8") as f:
+        dataset = yaml.safe_load(f)
+    return {val: idx for idx, val in enumerate(dataset['names'])}
+
+
+class2id = names2dict(yaml_path="./data/objects.yaml")
 
 
 def convert(size, box):
