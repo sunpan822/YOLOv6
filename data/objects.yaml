@@ -1,7 +1,0 @@
-train: /project/train/src_repo/dataset/images/train
-val: /project/train/src_repo/dataset/images/val
-
-nc: 20  # number of classes
-
-# class names
-names: [ 'front_wear','front_no_wear','front_under_nose_wear','front_under_mouth_wear','mask_front_wear','mask_front_under_nose_wear','mask_front_under_mouth_wear','side_wear','side_no_wear','side_under_nose_wear',        'side_under_mouth_wear','mask_side_wear','mask_side_under_nose_wear','mask_side_under_mouth_wear','side_back_head_wear','side_back_head_no_wear','back_head','strap','front_unknown','side_unknown' ] 
